@@ -9,7 +9,7 @@ Prove the end-to-end ComfyUI talking-head pipeline works on the target hardware 
 
 ## Context and decisions
 
-- **JoyVASA** (original Phase 0 target) has no ComfyUI node — only a standalone Python repo. It is being evaluated separately outside this project.
+- **JoyVASA** (original Phase 0 target) has no ComfyUI node — only a standalone Python repo. It is being evaluated standalone on Puente; if it produces acceptable quality it will be added as a subprocess adapter (see SPEC.md adapter layer). ComfyUI adapters are preferred; subprocess adapters are explicitly supported for models without ComfyUI nodes.
 - **SadTalker** is the pivot: `ComfyUI-SadTalker` (haomole) is available in ComfyUI-Manager, well-maintained, and confirmed working on RTX hardware.
 - Hardware: Puente box, RTX 3090 (24 GB VRAM), ComfyUI running at `http://192.168.20.120:8188/`.
 - Voice: Voicebox running at `https://voice.locopuente.org`.

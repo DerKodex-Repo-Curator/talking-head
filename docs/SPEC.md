@@ -19,14 +19,20 @@ itself.
 ### Layers
 
 1. **CLI / API layer.** User-facing. Parses command, loads character + config,
-   picks workflow, submits to ComfyUI, polls, returns output path.
-2. **Workflow layer.** JSON templates for each backend combination, with
+   picks workflow, submits to the appropriate backend, polls, returns output path.
+2. **Workflow layer.** JSON templates for each ComfyUI-based backend, with
    placeholders for user data (portrait path, audio, LoRA weights, prompt text).
-3. **Backend adapter layer.** Python classes that know how to fill in the
-   placeholders for a specific backend, validate its requirements, and map
-   backend-specific errors to user-friendly messages.
+3. **Backend adapter layer.** Python classes that know how to execute a specific
+   backend, validate its requirements, and map backend-specific errors to
+   user-friendly messages. Two adapter shapes are supported:
+   - **ComfyUI adapter** *(preferred)*: fills a workflow template and submits via
+     HTTP (`POST /prompt`, poll `/history/{id}`, fetch outputs). Used for any
+     model that has a ComfyUI custom node.
+   - **Subprocess adapter**: shells out to a standalone CLI (e.g. JoyVASA run
+     directly on the host) for models without a ComfyUI node. Same interface to
+     the layers above; different execution underneath.
 4. **ComfyUI layer.** External. Accessed via HTTP (`POST /prompt`, poll
-   `/history/{id}`, fetch outputs).
+   `/history/{id}`, fetch outputs). Only used by ComfyUI adapters.
 
 ### Character concept
 
