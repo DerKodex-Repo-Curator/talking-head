@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Runtime
+characters/*/models/
+characters/*/base-video.mp4
+characters/*/*.wav
+characters/*/*.jpg
+characters/*/*.png
+!characters/example/
+
+# Outputs
+output/
+*.mp4
+!docs/**/*.mp4
+
+# Secrets
+.env
+config.local.yml
